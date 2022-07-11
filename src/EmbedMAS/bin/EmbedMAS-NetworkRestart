@@ -1,0 +1,22 @@
+#! /bin/sh
+
+echo "Reiniciando serviço de rede"
+
+EmbedMAS_HOME=/opt/EmbedMAS
+
+wlanInterface=`cat $EmbedMAS_HOME/conf/wlanInterface.conf`
+
+
+ip link set $wlanInterface down
+systemctl stop wpa_supplicant
+systemctl stop networking
+systemctl stop dhcpcd
+systemctl stop isc-dhcp-server
+
+cat $EmbedMAS_HOME/conf/WLANs/*.conf > $EmbedMAS_HOME/etc/wpa_supplicant/wpa_supplicant.conf
+
+systemctl start wpa_supplicant
+systemctl start networking
+systemctl start dhcpcd
+systemctl start isc-dhcp-server
+

@@ -1,0 +1,33 @@
+MAS ncc_1701 {
+
+	infrastructure: Centralised
+
+	agents:
+		scott agentArchClass Communicator;
+
+	aslSourcePath:
+		"/opt/EmbedMAS/lib/ultron-protocol/inquilinism_receiver/asl";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
