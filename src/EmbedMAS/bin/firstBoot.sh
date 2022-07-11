@@ -48,5 +48,14 @@ ln -s $EmbedMAS_HOME/etc/hostname /etc/hostname
 ln -s $EmbedMAS_HOME/bin/EmbedMAS-WifiConn /usr/bin/EmbedMAS-WifiConn
 ln -s $EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart /usr/bin/EmbedMAS-NetworkRestart
 
+
+# Instalando o JAVA
+apt install /var/cache/apt/archives/openjdk-8-jre_8u312-b07-1+rpi1_armhf.deb -y
+
+
+# Instalando o Python pyserial
+apt install /var/cache/apt/archives/python-pip-whl_20.3.4-4+rpt1_all.deb -y
+pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
+
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
 reboot
