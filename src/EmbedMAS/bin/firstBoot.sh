@@ -43,6 +43,9 @@ ln -s $EmbedMAS_HOME/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
 # Configurando o hostname
 mv /etc/hostname /etc/hostname.bkp
 ln -s $EmbedMAS_HOME/etc/hostname /etc/hostname
+mv /etc/hosts /etc/hosts.bkp
+ln -s $EmbedMAS_HOME/etc/hosts /etc/hosts
+
 
 # Scripts
 ln -s $EmbedMAS_HOME/bin/EmbedMAS-WifiConn /usr/bin/EmbedMAS-WifiConn
@@ -50,12 +53,16 @@ ln -s $EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart /usr/bin/EmbedMAS-NetworkRestar
 
 
 # Instalando o JAVA
-apt install /var/cache/apt/archives/openjdk-8-jre_8u312-b07-1+rpi1_armhf.deb -y
+apt install /opt/EmbedMAS/var/cache/apt/archives/openjdk-8-jre_8u312-b07-1+rpi1_armhf.deb -y
 
 
 # Instalando o Python pyserial
-apt install /var/cache/apt/archives/python-pip-whl_20.3.4-4+rpt1_all.deb -y
+apt install /opt/EmbedMAS/var/cache/apt/archives/python3-pip_20.3.4-4+rpt1_all.deb -y
 pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
+
+#Conf Jason
+ln -s /opt/EmbedMAS/root/.java /root/.java
+ln -s /opt/EmbedMAS/root/.jason /root/.jason
 
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
 reboot
