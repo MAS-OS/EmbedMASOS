@@ -63,10 +63,11 @@ apt install /opt/EmbedMAS/var/cache/apt/archives/libexpat1-dev_2.2.10-2+deb11u3_
 apt install /opt/EmbedMAS/var/cache/apt/archives/python3-pip_20.3.4-4+rpt1_all.deb -y
 pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
 
-#Conf Jason
+#Conf user
 ln -s /opt/EmbedMAS/root/.java /root/.java
 ln -s /opt/EmbedMAS/root/.jason /root/.jason
 ln -s /opt/EmbedMAS/root/.arduino15 /root/.arduino15
+ln -s /opt/EmbedMAS/root/Arduino /root/Arduino
 
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
 reboot
