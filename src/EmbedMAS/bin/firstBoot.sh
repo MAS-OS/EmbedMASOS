@@ -63,6 +63,7 @@ pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
 #Conf Jason
 ln -s /opt/EmbedMAS/root/.java /root/.java
 ln -s /opt/EmbedMAS/root/.jason /root/.jason
+ln -s /opt/EmbedMAS/root/.arduino15 /root/.arduino15
 
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
 reboot
