@@ -2,7 +2,6 @@
 EmbedMAS_HOME=/opt/EmbedMAS
 
 echo "Ativando o teste de Conexão"
-sleep 10
 apMode(){
 	apConf=`cat $EmbedMAS_HOME/conf/apMode.conf`
 	# Verifica configuração modoAP
@@ -21,12 +20,16 @@ lanComm(){
 }
 
 commands(){
+	echo -n "Aguardando... "
+	sleep 30
 	if apMode; then
-		sleep 60
+		echo "ApMode Enable!"
+		return 0
 	else
 		if lanComm; then
+			echo "LAN Connected!"
 			$EmbedMAS_HOME/bin/ddnsUpdate.sh
-			sleep 60
+			return 0
 		else
 			wlanInterface=`cat $EmbedMAS_HOME/conf/wlanInterface.conf`
 			# Limpa tabela ARP
@@ -39,10 +42,10 @@ commands(){
 
 			if [ -s /tmp/arp ]
 			then
-		        	# Existe um membro conectado
+				echo "AutoAp ON!"
 				return 0
 			else
-		        	# Reiniciando Serviços de Rede
+				echo "Restarting Network!"
 				$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart
 			fi
 		fi

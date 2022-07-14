@@ -63,6 +63,9 @@ apt install /opt/EmbedMAS/var/cache/apt/archives/libexpat1-dev_2.2.10-2+deb11u3_
 apt install /opt/EmbedMAS/var/cache/apt/archives/python3-pip_20.3.4-4+rpt1_all.deb -y
 pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
 
+# Instalando DNSUtils
+apt install /opt/EmbedMAS/var/cache/apt/archives/dnsutils_1%3a9.16.27-1~deb11u1_all.deb -y
+
 #Conf user
 ln -s /opt/EmbedMAS/root/.java /root/.java
 ln -s /opt/EmbedMAS/root/.jason /root/.jason
