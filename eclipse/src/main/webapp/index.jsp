@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>EmbedMAS-OS</title>
 </head>
 <body>
-	Hello World!
+
+	<h1>BEM-VINDO</h1>
+	CLIQUE --->  <a href="home.jsp">PRA ENTRAR</a>
+
 </body>
 </html>

@@ -10,3 +10,4 @@ fi
 
 $EmbedMAS_HOME/bin/task/taskMaster.sh &
 $EmbedMAS_HOME/bin/testGateway.sh &
+$EmbedMAS_HOME/lib/tomcat/bin/catalina.sh start &

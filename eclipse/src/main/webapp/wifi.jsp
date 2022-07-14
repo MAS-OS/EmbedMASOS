@@ -1,0 +1,111 @@
+<%@page import="org.masos.embed.SysConf.model.User"%>
+<%@ page session= "true" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+td {
+  text-align: center;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+User userSession = new User();
+userSession = (User) request.getSession().getAttribute("userSession");
+
+ if((userSession==null) || (!userSession.getSession().equals(session.getId()))){
+	// System.out.println("[wifiscan.jsp] Autenticação Inválida");
+		RequestDispatcher dispatcher;
+		request.setAttribute("resposta","Usuário não autenticado");
+		dispatcher = request.getRequestDispatcher("home.jsp");
+		dispatcher.forward(request, response);
+	 
+}else{
+	//System.out.println("[wifiscan.jsp] Autenticado");
+}		
+%>
+<nav>
+		<p>Robotic-agent Educational Platform</p>
+		<hr>
+		<a href="central.jsp"><button>Principal</button></a>
+		<!--  
+		<a href="commander.jsp"><button>Commander</button></a>
+		<a href="wifiscan.jsp"><button>Wifi</button></a>
+		-->
+	<hr>
+	</nav>
+	<!-- ############################## PARTE SUPERIOR ######################## -->
+	
+
+	<form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="status">
+	  <input type="submit" value="Status">
+	 </form>
+	 <br>
+	<form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="scan">
+	  <input type="submit" value="SCAN">
+	 </form>
+	 <br>
+	 <form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="apmode">
+	  <input type="submit" value="APMode">
+	  </form>
+	  
+	  <br>
+	  
+	  
+	  
+	  <form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="listconf">
+	  <input type="submit" value="Listar Redes">
+	  </form>
+	  
+	  <form action="Wifi" method="post">
+	  			<input type="hidden"	id="action" 		name="action" 		value="saveconf">
+	  ESSID:	<input type="text" 		id="connectESSID" 	name="connectESSID"	size="15">
+	  KEY:		<input type="password"	id="connectKEY" 	name="connectKEY"	size="15">
+	  <input type="submit" value="Adicionar Rede">
+	  </form>
+	  <form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="delconf">
+	  <input type="submit" value="Esquecer Redes">
+	  </form>
+	  <form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="restartwlan">
+	  <input type="submit" value="Aplicar Configurações">
+	  </form>
+	  
+	 
+
+	
+	
+	
+	
+
+<!-- ############################## PARTE INFERIOR ######################## -->
+	<div>
+		<%
+		//Barra de mensagem
+		String resposta = (String) request.getAttribute("resposta");
+		if (resposta != null){
+			out.println("<br>");
+			out.println(resposta);
+		}
+		%>
+		<hr>
+		<p>Robotic-agent Educational Platform - Beta</p>
+		<hr>
+	</div>
+
+</body>
+</html>
