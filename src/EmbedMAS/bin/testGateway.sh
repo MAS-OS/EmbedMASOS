@@ -20,7 +20,7 @@ lanComm(){
 }
 
 commands(){
-	echo -n "Aguardando... "
+	#echo -n "Aguardando... "
 	sleep 30
 	if apMode; then
 		echo "ApMode Enable!"
@@ -42,7 +42,7 @@ commands(){
 
 			if [ -s /tmp/arp ]
 			then
-				echo "AutoAp ON!"
+				#echo "AutoAp ON!"
 				return 0
 			else
 				echo "Restarting Network!"

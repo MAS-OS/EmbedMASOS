@@ -53,24 +53,28 @@ ln -s $EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart /usr/bin/EmbedMAS-NetworkRestar
 
 
 # Instalando o JAVA
-apt install /opt/EmbedMAS/var/cache/apt/archives/libcups2_2.3.3op2-3+deb11u2_armhf.deb -y
-apt install /opt/EmbedMAS/var/cache/apt/archives/openjdk-8-jre_8u312-b07-1+rpi1_armhf.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/libcups2_2.3.3op2-3+deb11u2_armhf.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/openjdk-8-jre_8u312-b07-1+rpi1_armhf.deb -y
 
 
 # Instalando o Python pyserial
-apt install /opt/EmbedMAS/var/cache/apt/archives/libexpat1_2.2.10-2+deb11u3_armhf.deb -y
-apt install /opt/EmbedMAS/var/cache/apt/archives/libexpat1-dev_2.2.10-2+deb11u3_armhf.deb -y
-apt install /opt/EmbedMAS/var/cache/apt/archives/python3-pip_20.3.4-4+rpt1_all.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/libexpat1_2.2.10-2+deb11u3_armhf.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/libexpat1-dev_2.2.10-2+deb11u3_armhf.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/python3-pip_20.3.4-4+rpt1_all.deb -y
 pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
 
 # Instalando DNSUtils
-apt install /opt/EmbedMAS/var/cache/apt/archives/dnsutils_1%3a9.16.27-1~deb11u1_all.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/bind9-libs_1%3a9.16.27-1~deb11u1_armhf.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/bind9-dnsutils_1%3a9.16.27-1~deb11u1_armhf.deb -y
+apt install $EmbedMAS_HOME/var/cache/apt/archives/dnsutils_1%3a9.16.27-1~deb11u1_all.deb -y
+
+apt clean; apt autoclean; apt autoremove -y
 
 #Conf user
-ln -s /opt/EmbedMAS/root/.java /root/.java
-ln -s /opt/EmbedMAS/root/.jason /root/.jason
-ln -s /opt/EmbedMAS/root/.arduino15 /root/.arduino15
-ln -s /opt/EmbedMAS/root/Arduino /root/Arduino
+ln -s $EmbedMAS_HOME/root/.java /root/.java
+ln -s $EmbedMAS_HOME/root/.jason /root/.jason
+ln -s $EmbedMAS_HOME/root/.arduino15 /root/.arduino15
+ln -s $EmbedMAS_HOME/root/Arduino /root/Arduino
 
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
 reboot
