@@ -33,7 +33,6 @@ public class Wifi extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -41,12 +40,12 @@ public class Wifi extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 	
 		String action = request.getParameter("action");		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("wifiscan.jsp"); 						/*default*/
+		RequestDispatcher dispatcher = request.getRequestDispatcher("wifi.jsp"); 						/*default*/
 			
 		User userSession = new User();
 		userSession = (User) request.getSession().getAttribute("userSession");
@@ -71,10 +70,10 @@ public class Wifi extends HttpServlet {
 			else if(action.equals("apmode")){
 				
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-				serverSession.exec(cmd.createTask());
+	/*			serverSession.exec(cmd.createTask());
 				serverSession.exec(cmd.addTask(cmd.getAPModeWLAN()));
 				serverSession.exec(cmd.addTask(cmd.getRestartWLAN()));
-				serverSession.exec(cmd.playTask());
+				serverSession.exec(cmd.playTask());*/
 				serverSession.disconnect();
 				
 				userSession.logout();
@@ -84,13 +83,13 @@ public class Wifi extends HttpServlet {
 
 			}else if(action.equals("delconf")) {
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-				serverSession.exec(cmd.createTask());
+	/*			serverSession.exec(cmd.createTask());
 				serverSession.exec(cmd.addTask(cmd.getDelWLANsConf()));
-				serverSession.exec(cmd.playTask());
+				serverSession.exec(cmd.playTask());*/
 				serverSession.disconnect();
 				
 				request.setAttribute("resposta","Configurações de WLAN apagadas!");
-				dispatcher = request.getRequestDispatcher("wifiscan.jsp");
+				dispatcher = request.getRequestDispatcher("wifi.jsp");
 			}else if(action.equals("listconf")) {
 				
 				String list = "<hr>Redes cadastradas<br>";
@@ -100,24 +99,24 @@ public class Wifi extends HttpServlet {
 				list = list+"<hr>";
 				
 				request.setAttribute("resposta",list.replaceAll("\t", "<br>"));
-				dispatcher = request.getRequestDispatcher("wifiscan.jsp");
+				dispatcher = request.getRequestDispatcher("wifi.jsp");
 			}
 			else if(action.equals("saveconf")) {
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-				serverSession.exec(cmd.createTask());
+		/*		serverSession.exec(cmd.createTask());
 				serverSession.exec(cmd.addTask(cmd.getNewWLANConf(request.getParameter("connectESSID"), request.getParameter("connectKEY"))));
-				serverSession.exec(cmd.playTask());
+				serverSession.exec(cmd.playTask());*/
 				serverSession.disconnect();
 
 				request.setAttribute("resposta","Configuração de WLAN adicionada com sucesso!");
-				dispatcher = request.getRequestDispatcher("wifiscan.jsp");
+				dispatcher = request.getRequestDispatcher("wifi.jsp");
 			}else if(action.equals("restartwlan")) {
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-				serverSession.exec(cmd.createTask());
+			/*	serverSession.exec(cmd.createTask());
 				serverSession.exec(cmd.addTask(cmd.getCreateWPAfile()));
 				serverSession.exec(cmd.addTask(cmd.getRestartWLAN()));
 				serverSession.exec(cmd.addTask("rm -rf /tmp/javinoAPMode"));
-				serverSession.exec(cmd.playTask());
+				serverSession.exec(cmd.playTask());*/
 				serverSession.disconnect();
 				
 				userSession.logout();

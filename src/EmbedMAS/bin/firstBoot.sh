@@ -50,6 +50,7 @@ ln -s $EmbedMAS_HOME/etc/hosts /etc/hosts
 # Scripts
 ln -s $EmbedMAS_HOME/bin/EmbedMAS-WifiConn /usr/bin/EmbedMAS-WifiConn
 ln -s $EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart /usr/bin/EmbedMAS-NetworkRestart
+ln -s $EmbedMAS_HOME/bin/task/taskNew.sh /usr/bin/EmbedMAS-NewTask
 
 
 # Instalando o JAVA

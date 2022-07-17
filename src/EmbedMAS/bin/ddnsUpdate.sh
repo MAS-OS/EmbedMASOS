@@ -19,7 +19,7 @@ IP=`ip route | grep link | cut -f 9 -d " "`
 last_IP=`cat $EmbedMAS_TMP/last_IP 2>/dev/null`
 hostname=`cat $EmbedMAS_HOME/conf/ddns.conf | cut -d ":" -f 1`
 last_hostname=`cat $EmbedMAS_TMP/last_hostname 2>/dev/null`
-last_dnsrecord=`dig +short $hostname$fqdn`
+last_dnsrecord=`dig +short @8.8.4.4 $hostname$fqdn`
 
 if [ "$hostname" != "$last_hostname" ] ||  [ "$IP" != "$last_IP" ] || [ "$IP" != "$last_dnsrecord" ]
 then

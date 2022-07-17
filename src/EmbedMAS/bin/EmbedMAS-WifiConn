@@ -25,6 +25,6 @@ echo " "
 
 
 wpa_passphrase $wlanSSID $wlanPass > $EmbedMAS_HOME/conf/WLANs/lan_$wlanSSID.conf
-echo "Agendando WLAN Configuring the WLAN..."
-$EmbedMAS_HOME/bin/task/taskNew.sh "/opt/EmbedMAS/bin/EmbedMAS-NetworkRestart"
+echo "Agendando WLAN Reconfigure ..."
+$EmbedMAS_HOME/bin/task/taskNew.sh "/opt/EmbedMAS/bin/EmbedMAS-NetworkRestart -m default"
 

@@ -3,7 +3,7 @@ package org.masos.embed.SysConf.controller;
 public class ShellCommands {
 	
 	private final String javinoPath		= "/opt/javino/";
-	private final String confAPModeWLAN = "cat "+this.javinoPath+"WLANs/base.conf > /etc/wpa_supplicant/wpa_supplicant.conf; cat "+this.javinoPath+"WLANs/modeAp.conf >> /etc/wpa_supplicant/wpa_supplicant.conf; touch /tmp/javinoAPMode";
+	private final String confAPModeWLAN = "EmbedMAS-NewTask echo 1 > /opt/EmbedMAS/conf/apMode.conf";
 	//private final String confClientWLAN = "cp /tmp/wpa /etc/wpa_supplicant/wpa_supplicant.conf; touch /tmp/javinoAPMode";
 	private final String createWPAfile	= "cat "+this.javinoPath+"WLANs/*.conf > /etc/wpa_supplicant/wpa_supplicant.conf; touch /tmp/javinoAPMode";
 	private final String restartWLAN 	= "systemctl stop wpa_supplicant.service; systemctl stop networking.service; systemctl stop dhcpcd.service; systemctl stop isc-dhcp-server.service; systemctl start wpa_supplicant.service; systemctl start networking.service; systemctl start dhcpcd.service; systemctl start isc-dhcp-server.service";
@@ -38,7 +38,7 @@ public class ShellCommands {
 		return this.restartWLAN;
 	}
 	
-	public String createTask() {
+/*	public String createTask() {
 		return "sudo rm /tmp/task; echo '#! /bin/sh' > /tmp/task";
 	}
 	
@@ -48,7 +48,8 @@ public class ShellCommands {
 	
 	public String playTask() {
 		return "mv /tmp/task "+this.pathTask;
-	}
+	}*/
+	
 	
 	public String getNewWLANConf(String connectESSID, String connectKEY) {
 		return  "wpa_passphrase "+connectESSID+" "+connectKEY+" > "+this.javinoPath+"WLANs/lan_"+connectESSID+".conf";

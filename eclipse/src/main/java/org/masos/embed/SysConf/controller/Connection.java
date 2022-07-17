@@ -4,8 +4,8 @@ package org.masos.embed.SysConf.controller;
 public class Connection {
 	
 	private final Integer maxWifiScan 		= 16;							/*Número máximo de redes que serão listadas durante Scan*/ 
-	private final String cmdLineScanWLAN	= "sudo iwlist scan";
-	private final String cmdLineStatusWLAN 	= "sudo iwconfig 2>/dev/null";
+	private final String cmdLineScanWLAN	= "iwlist scan";
+	private final String cmdLineStatusWLAN 	= "iwconfig 2>/dev/null";
 	
 	private String[][] listOfWLANs;
 	private Integer numberOfWLANS;
