@@ -1,0 +1,30 @@
+EmbedMAS-NetworkRestart
+
+Nome: Gerenciador de Conexão de Rede 
+
+Descrição: Utilizado para configurar o modo de operação da Interface de Redes e serviços necessários para seu funcionamento.
+
+OPÇÕES:
+	--help -Exibe este tutorial
+	--forget    - Esquece as redes Wireless cadastradas
+	-f [option] - Aplica as configuração da Rede
+		-f default	= Modo cliente de rede. Carrega todas as redes wifi cadastradas para o wpa_supplicant e tenta conectar em alguma Wifi disponível
+		-f apmode	= Modo Access Point. Carrega a configuração de Soft AP no wpa_supplicant e ativa o servidor de DHCP
+	 
+	-m [option] - Define o Modo de Operação
+		-m ap		= Access Point.
+		-m default	= Tenta conectar em uma rede, caso contrário, ativa o modo AP
+		-m client	= Conecta em uma rede Wifi
+	
+	-c [number] - Define o Canal de Operação
+	-e [name]   - Define o ESSID da Rede sem fio
+	-k [key]    - Chave de conexão com a Rede sem fio
+
+EXEMPLOS:
+	EmbedMAS-NetworkRestart -m ap -c 1 -e EmbedMAS -k NONE	= Configura a Rede sem fio para funcionar em modo ap com um ESSID=EmbedMAS sem senha
+	
+AUTHOR
+       Nilson Mori - nilsonmori@gmail.com
+       
+COPYRIGHT: GNU GPL
+Revisão: 2022-07-17

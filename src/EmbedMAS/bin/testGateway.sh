@@ -22,55 +22,28 @@ lanComm(){
 commands(){
 	#echo -n "Aguardando... "
 	if apMode; then
-		echo "ApMode Enable!"
-#		systemctl status isc-dhcp-server > /dev/null
-#		[ $? -eq 0 ] && echo dchcp-ok && return 0
-#
-#		echo INICIA DHCP
-#		systemctl restart isc-dhcp-server > /dev/null
 		return 0
 	else
 		if lanComm; then
-			echo "LAN Connected!"
+#			echo "LAN Connected!"
 			$EmbedMAS_HOME/bin/ddnsUpdate.sh
 			return 0
 		else
-			echo "LAN Sem Acesso!"
-			sleep 10
+			sleep 30
 			if lanComm; then
 				return 0
 			else
-				echo LAN-SEMACESSO
-				sleep 10
+				sleep 30
 				if lanComm; then
 					return 0
 				else
+					echo LAN not Connected - restart conf
+					$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -f default
+					sleep 30
 					$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -m ap
+					echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 				fi
 			fi
-#			wlanInterface=`cat $EmbedMAS_HOME/conf/wlanInterface.conf`
-#			# Limpa tabela ARP
-#			ip link set arp off dev $wlanInterface
-#			ip link set arp on dev $wlanInterface
-#			sleep 60
-#
-#			# Consulta tabela ARP
-#			arp -ni $wlanInterface | grep $wlanInterface > /tmp/arp
-#
-#			if [ -s /tmp/arp ]
-#			then
-#				#echo "AutoAp ON!"
-#				return 0
-#			else
-#				if apMode; then
-#					echo "ApMode Enable!"
-#					return 0
-#				else
-#					echo "Restarting Network!"
-#					#cat $EmbedMAS_HOME/conf/WLANs/*.conf > $EmbedMAS_HOME/etc/wpa_supplicant/wpa_supplicant.conf
-#					$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -m default
-#				fi
-#			fi
 		fi
 	fi
 }

@@ -1,26 +1,25 @@
 #! /bin/sh
-
-echo "Reiniciando serviço de rede"
-
 EmbedMAS_HOME=/opt/EmbedMAS
 EmbedMAS_TMP=/tmp/.embedMAS
 mkdir -p $EmbedMAS_TMP
 
-while getopts i:f:m:c:e:k: flag
+while getopts h:f:m:c:e:k:-: flag
 do
     case "${flag}" in
-        i) lanInterface=${OPTARG};;
         f) confFile=${OPTARG};;
         m) modeOperation=${OPTARG};;
         c) ch=${OPTARG};;
         e) name=${OPTARG};;
         k) key=${OPTARG};;
+        -) opt=${OPTARG};;
     esac
 done
 
-######################### Interface #########################################
-if [ "$lanInterface" = "" ]; then
-	lanInterface=`cat $EmbedMAS_HOME/conf/wlanInterface.conf`
+
+if [ "$opt" = "help" ]; then
+	cat $EmbedMAS_HOME/docs/scripts/EmbedMAS-NetworkRestart.txt
+elif [ "$opt" = "forget" ]; then
+	rm $EmbedMAS_HOME/conf/WLANs/lan_*.conf
 fi
 
 ######################## Mode Operation #####################################
@@ -53,48 +52,32 @@ elif [ "$modeOperation" = "default" ]; then
 	echo "Agendando Default WLAN Reconfigure ..."
 	$EmbedMAS_HOME/bin/task/taskNew.sh "/opt/EmbedMAS/bin/EmbedMAS-NetworkRestart -f default"
 	exit 0
+elif [ "$modeOperation" = "client" ]; then
+	echo 0 > $EmbedMAS_HOME/conf/apMode.conf
+	wpa_passphrase $name $key > $EmbedMAS_HOME/conf/WLANs/lan_$name.conf
+	echo "Agendando WLAN Reconfigure ..."
+	$EmbedMAS_HOME/bin/task/taskNew.sh "/opt/EmbedMAS/bin/EmbedMAS-NetworkRestart -f default"
+	exit 0
 fi
 
 ######################### WPA Conf ##########################################
 if [ "$confFile" != "" ]; then
-	echo PARANDO-SERVICOS
 		systemctl stop isc-dhcp-server
 		systemctl stop dhcpcd
 		systemctl stop wpa_supplicant
 		systemctl stop networking
-
 	if [ "$confFile" = "default" ]; then
-		echo CONF-DEFAULT
   		confFile="$EmbedMAS_HOME/conf/WLANs/base.conf $EmbedMAS_HOME/conf/WLANs/lan_*.conf"
  		cat $confFile > $EmbedMAS_HOME/etc/wpa_supplicant/wpa_supplicant.conf
-#		cp -v $EmbedMAS_HOME/interfaces-ap /etc/network/interfaces
 		systemctl start networking
 		systemctl start wpa_supplicant
 		systemctl start dhcpcd
   	elif [ "$confFile" = "apmode" ]; then
-		echo CONF-AP
   		confFile="$EmbedMAS_HOME/conf/WLANs/base.conf $EmbedMAS_HOME/conf/WLANs/modeApZeroConf.conf"
  		cat $confFile > $EmbedMAS_HOME/etc/wpa_supplicant/wpa_supplicant.conf
-#		cp -v $EmbedMAS_HOME/interfaces-ap /etc/network/interfaces
 		systemctl start networking
 		systemctl start wpa_supplicant
 		systemctl start dhcpcd
 		systemctl start isc-dhcp-server
  	fi
-	echo FIM
 fi
-
-
-######################## Restarting Services ################################
-#ip link set $lanInterface down
-#systemctl stop wpa_supplicant
-#systemctl stop networking
-#systemctl stop dhcpcd
-#systemctl stop isc-dhcp-server
-#rm -rf /var/lib/dhcp/*
-
-#systemctl start wpa_supplicant
-#systemctl start networking
-#systemctl start dhcpcd
-#sleep 5
-#systemctl start isc-dhcp-server
