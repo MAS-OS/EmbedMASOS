@@ -48,8 +48,8 @@ ln -s $EmbedMAS_HOME/etc/hosts /etc/hosts
 
 
 # Scripts
-ln -s $EmbedMAS_HOME/bin/EmbedMAS-WifiConn /usr/bin/EmbedMAS-WifiConn
-ln -s $EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart /usr/bin/EmbedMAS-NetworkRestart
+ln -s $EmbedMAS_HOME/bin/chonosWifiConn.sh /usr/bin/chonosWifiConn
+ln -s $EmbedMAS_HOME/bin/chonosWifiConf.sh /usr/bin/chonosWifiConf
 ln -s $EmbedMAS_HOME/bin/task/taskNew.sh /usr/bin/EmbedMAS-NewTask
 
 
@@ -76,6 +76,8 @@ ln -s $EmbedMAS_HOME/root/.java /root/.java
 ln -s $EmbedMAS_HOME/root/.jason /root/.jason
 ln -s $EmbedMAS_HOME/root/.arduino15 /root/.arduino15
 ln -s $EmbedMAS_HOME/root/Arduino /root/Arduino
+
+/usr/bin/chonosWifiConf -m ap
 
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
 reboot

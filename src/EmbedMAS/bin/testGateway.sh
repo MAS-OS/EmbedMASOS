@@ -38,10 +38,10 @@ commands(){
 					return 0
 				else
 					echo LAN not Connected - restart conf
-					$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -f default
+					#$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -f default
 					sleep 30
-					$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -m ap
-					echo 0 > $EmbedMAS_HOME/conf/apMode.conf
+					$EmbedMAS_HOME/bin/chonosWifiConf -m ap
+					echo 1 > $EmbedMAS_HOME/conf/apMode.conf
 				fi
 			fi
 		fi

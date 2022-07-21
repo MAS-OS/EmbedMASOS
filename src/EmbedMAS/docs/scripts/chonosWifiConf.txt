@@ -1,0 +1,32 @@
+chonosWifiConf
+
+Nome: Gerenciador de Conexão de Rede sem fio 
+
+Descrição: Utilizado para configurar o modo de operação da Interface de Redes e serviços necessários para seu funcionamento.
+
+OPÇÕES:
+	--help -Exibe este tutorial
+	--forget    - Esquece as redes Wireless cadastradas
+	 
+	-m [option] - Define o Modo de Operação
+		-m ap		= Access Point.
+		-m default	= Tenta conectar em uma rede, caso contrário, ativa o modo AP
+		-m client	= Conecta em uma rede Wifi
+	
+	-c [number] - Define o Canal de Operação
+	-e [name]   - Define o ESSID da Rede sem fio
+	-k [key]    - Chave de conexão com a Rede sem fio
+
+EXEMPLOS:
+	chonosWifiConf -m ap -c 1 -e EmbedMAS -k NONE	
+		Configura a Rede sem fio para funcionar em modo ap com um ESSID=EmbedMAS sem senha
+	
+	chonosWifiConf -m client -e MyNetwork -k MyPassword
+		Configura a Rede sem fio para funcionar em modo Client na WLAN MyNetwork com a senha MyPassword
+
+
+ChonOS - http://os.chon.group
+Research Group in Cognitive Hardware On Networks
+os@chon.group       
+COPYRIGHT: GNU GPL
+Revisão: 2022-07-17

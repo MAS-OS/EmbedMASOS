@@ -1,0 +1,10 @@
+MAS planet {
+	infrastructure: Centralised
+	agents:
+		sulu agentArchClass Argo;
+		macCoy agentArchClass Communicator;
+		
+	aslSourcePath:
+		"asl";
+
+}
