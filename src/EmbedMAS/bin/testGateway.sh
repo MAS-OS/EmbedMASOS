@@ -1,7 +1,9 @@
 #! /bin/sh
 EmbedMAS_HOME=/opt/EmbedMAS
 
-echo "Ativando o teste de Conexão"
+echo "[  OK  ] Ativando o teste de Conexão"
+echo 0 > $EmbedMAS_HOME/conf/apMode.conf
+
 apMode(){
 	apConf=`cat $EmbedMAS_HOME/conf/apMode.conf`
 	# Verifica configuração modoAP
@@ -20,12 +22,12 @@ lanComm(){
 }
 
 commands(){
-	#echo -n "Aguardando... "
 	if apMode; then
+		echo -n "AP Mode ON "
 		return 0
 	else
 		if lanComm; then
-#			echo "LAN Connected!"
+			echo "LAN Connected!"
 			$EmbedMAS_HOME/bin/ddnsUpdate.sh
 			return 0
 		else
@@ -37,11 +39,11 @@ commands(){
 				if lanComm; then
 					return 0
 				else
-					echo LAN not Connected - restart conf
-					#$EmbedMAS_HOME/bin/EmbedMAS-NetworkRestart -f default
-					sleep 30
-					$EmbedMAS_HOME/bin/chonosWifiConf -m ap
-					echo 1 > $EmbedMAS_HOME/conf/apMode.conf
+					echo "LAN not Connected - restart conf"
+#					/usr/bin/chonosWifiConf -f default
+#					sleep 30
+					/usr/bin/chonosWifiConf -m ap
+					echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 				fi
 			fi
 		fi

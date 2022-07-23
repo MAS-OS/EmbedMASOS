@@ -27,6 +27,7 @@ EXEMPLOS:
 
 ChonOS - http://os.chon.group
 Research Group in Cognitive Hardware On Networks
-os@chon.group       
+os@chon.group      
+ 
 COPYRIGHT: GNU GPL
 Revisão: 2022-07-17

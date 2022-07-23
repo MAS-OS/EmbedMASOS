@@ -1,13 +1,10 @@
 MAS planet {
 	infrastructure: Centralised
 	agents:
-		//agentArgo agentArchClass Argo;
-	//	kirk agentArchClass Communicator;
+		agentArgo agentArchClass Argo;
+		agentComm agentArchClass Communicator;
 		
-	/*aslSourcePath:
+	aslSourcePath:
 		"asl";
-		*/
-
-        teste;
 
 }

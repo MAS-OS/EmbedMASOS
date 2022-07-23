@@ -69,6 +69,9 @@ apt install $EmbedMAS_HOME/var/cache/apt/archives/bind9-libs_1%3a9.16.27-1~deb11
 apt install $EmbedMAS_HOME/var/cache/apt/archives/bind9-dnsutils_1%3a9.16.27-1~deb11u1_armhf.deb -y
 apt install $EmbedMAS_HOME/var/cache/apt/archives/dnsutils_1%3a9.16.27-1~deb11u1_all.deb -y
 
+# Instalando JQ
+apt install $EmbedMAS_HOME/var/cache/apt/archives/jq_1.6-2.1_armhf.deb -y
+
 apt clean; apt autoclean; apt autoremove -y
 
 #Conf user

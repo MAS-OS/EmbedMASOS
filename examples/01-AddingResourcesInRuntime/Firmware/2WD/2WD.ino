@@ -111,16 +111,6 @@ void turnRight(){
   setStatus("turningRight");
 }
 
-/*void safeMode(){
-  if(getSafeMode()){
-    int x = hc.dist(1);
-    if((x > 1) && (x < 10)){
-      stopRightNow();
- //     javino.sendmsg("safeMode(on)");  
-    }
-  }
-}
-*/
 String getStatus(){
   return "status("+strStatus+");";
 }
