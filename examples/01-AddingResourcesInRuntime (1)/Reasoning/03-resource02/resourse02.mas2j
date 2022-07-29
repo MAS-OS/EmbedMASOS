@@ -1,8 +1,8 @@
 MAS planet {
 	infrastructure: Centralised
 	agents:
-		spock agentArchClass Argo;
-		kirk agentArchClass Communicator;
+		agentArgo2 agentArchClass Argo;
+		agentComm2 agentArchClass Communicator;
 		
 	aslSourcePath:
 		"asl";

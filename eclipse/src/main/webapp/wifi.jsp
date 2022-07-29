@@ -51,6 +51,20 @@ userSession = (User) request.getSession().getAttribute("userSession");
 	  <input type="submit" value="Status">
 	 </form>
 	 <br>
+	 <form action="Wifi" method="post">
+	 <input type="hidden" id="action" name="action" value="forget">
+	 <input type="submit" value="Esquecer Redes">
+	 </form>
+	 <form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="listconf">
+	  <input type="submit" value="Listar Redes Cadastradas">
+	  </form>
+	 <br>
+	 <form action="Wifi" method="post">
+	  <input type="hidden" id="action" name="action" value="tryreconnect">
+	  <input type="submit" value="Tentar Reconectar">
+	  </form>
+	 <br>
 	<form action="Wifi" method="post">
 	  <input type="hidden" id="action" name="action" value="scan">
 	  <input type="submit" value="SCAN">
@@ -58,6 +72,8 @@ userSession = (User) request.getSession().getAttribute("userSession");
 	 <br>
 	 <form action="Wifi" method="post">
 	  <input type="hidden" id="action" name="action" value="apmode">
+	  ESSID:	<input type="text" 		id="connectESSID" 	name="apESSID"	size="15">
+	  KEY (8 caracteres obrigatório):		<input type="password"	id="connectKEY" 	name="apKEY"	size="15">
 	  <input type="submit" value="APMode">
 	  </form>
 	  
@@ -65,25 +81,17 @@ userSession = (User) request.getSession().getAttribute("userSession");
 	  
 	  
 	  
-	  <form action="Wifi" method="post">
-	  <input type="hidden" id="action" name="action" value="listconf">
-	  <input type="submit" value="Listar Redes">
-	  </form>
+
 	  
 	  <form action="Wifi" method="post">
-	  			<input type="hidden"	id="action" 		name="action" 		value="saveconf">
+	  			<input type="hidden"	id="action" 		name="action" 		value="clientmode">
 	  ESSID:	<input type="text" 		id="connectESSID" 	name="connectESSID"	size="15">
 	  KEY:		<input type="password"	id="connectKEY" 	name="connectKEY"	size="15">
-	  <input type="submit" value="Adicionar Rede">
+	  <input type="submit" value="Ingressar em WLAN">
 	  </form>
-	  <form action="Wifi" method="post">
-	  <input type="hidden" id="action" name="action" value="delconf">
-	  <input type="submit" value="Esquecer Redes">
-	  </form>
-	  <form action="Wifi" method="post">
-	  <input type="hidden" id="action" name="action" value="restartwlan">
-	  <input type="submit" value="Aplicar Configurações">
-	  </form>
+	  
+
+	 
 	  
 	 
 

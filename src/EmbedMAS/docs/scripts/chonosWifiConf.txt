@@ -5,8 +5,9 @@ Nome: Gerenciador de Conexão de Rede sem fio
 Descrição: Utilizado para configurar o modo de operação da Interface de Redes e serviços necessários para seu funcionamento.
 
 OPÇÕES:
-	--help -Exibe este tutorial
-	--forget    - Esquece as redes Wireless cadastradas
+	--help    - Exibe este tutorial
+	--forget  - Esquece as redes Wireless cadastradas
+	--list    - Lista as redes Wireless cadastradas
 	 
 	-m [option] - Define o Modo de Operação
 		-m ap		= Access Point.

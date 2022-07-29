@@ -12,7 +12,7 @@
 +!connect <-
 	.print("Iniciando conexão com a SkyNet");
 	.connectCN("skynet.turing.pro.br",5500,"4168ef73-db44-48e3-a36e-231d3ef4155a");
-	.wait(15000);
+	.wait(120000);
 	!disconnect.
 
 +!disconnect <-

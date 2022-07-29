@@ -23,27 +23,27 @@ lanComm(){
 
 commands(){
 	if apMode; then
-		echo -n "AP Mode ON "
+		#echo -n "AP Mode ON "
 		return 0
 	else
 		if lanComm; then
-			echo "LAN Connected!"
+			#echo "LAN Connected!"
 			$EmbedMAS_HOME/bin/ddnsUpdate.sh
+			sleep 120
 			return 0
 		else
+			chonosWifiConf -m default
 			sleep 30
 			if lanComm; then
 				return 0
 			else
+				chonosWifiConf -m default
 				sleep 30
 				if lanComm; then
 					return 0
 				else
-					echo "LAN not Connected - restart conf"
-#					/usr/bin/chonosWifiConf -f default
-#					sleep 30
+					echo "LAN não conectada - ativando modo AP"
 					/usr/bin/chonosWifiConf -m ap
-					echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 				fi
 			fi
 		fi

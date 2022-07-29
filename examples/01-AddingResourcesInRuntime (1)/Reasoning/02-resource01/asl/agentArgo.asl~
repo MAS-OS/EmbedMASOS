@@ -1,15 +1,15 @@
 /* Initial beliefs and rules */
-abroad(yes).
+//abroad(yes).
 value(50).
 /* Initial goals */
 !start.
 //!conf.
 /* Plans */
-+!start: abroad(no) <-
-	.print("agentArgo está na nave");
-	!play.
++!start: abroad(no)[source(agentComm)] <-
+	.print("agentArgo está na nave - Iniciando controle do hardware");
+	!conf.
 	
-+!start: abroad(yes) <-
++!start: abroad(yes)[source(agentComm)] <-
 	.print("AgentArgo aguardando transporte");
 	.wait(5000);
 	-abroad(yes);
@@ -17,9 +17,11 @@ value(50).
 	+Reply;
 	!start.
 
-+!start: inside <-
-	-+abroad(no);
++!start <-
+	.send(agentComm, askOne, abroad(Status), Reply);
+	+Reply;
 	!start.
+	
 //************************************************************
 +!conf: abroad(no)<-
 	.print("Iniciando a comunicação com o Arduino");

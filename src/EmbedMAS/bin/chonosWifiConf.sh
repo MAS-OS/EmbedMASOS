@@ -20,6 +20,26 @@ if [ "$opt" = "help" ]; then
 	cat $EmbedMAS_HOME/docs/scripts/chonosWifiConf.txt
 elif [ "$opt" = "forget" ]; then
 	rm $EmbedMAS_HOME/conf/WLANs/lan_*.conf
+elif [ "$opt" = "list" ]; then
+	qtd=`cat $EmbedMAS_HOME/conf/WLANs/lan_*.conf 2> /dev/null | grep "network=" | nl | tail -1 | xargs | cut -d " " -f 1`
+	echo "{" > $EmbedMAS_TMP/json.out
+		i=2
+		while [ $i -le $((qtd+1)) ]; do
+			essid=`cat $EmbedMAS_HOME/conf/WLANs/lan_*.conf | xargs | cut -d "{" -f $i | xargs | cut -d " " -f 1 | cut -d "=" -f 2`
+			echo "\"$((i-2))\": {" >> $EmbedMAS_TMP/json.out
+			echo "\"ESSID\": \"$essid\"," >> $EmbedMAS_TMP/json.out    
+			key=`cat $EmbedMAS_HOME/conf/WLANs/lan_*.conf | xargs | cut -d "{" -f $i | xargs | cut -d " " -f 2 | cut -d "=" -f 2`
+			echo "\"Pass\": \"$key\"" >> $EmbedMAS_TMP/json.out
+			
+			if [ $i -le $((qtd)) ]; then
+				echo "}," >> $EmbedMAS_TMP/json.out
+			else
+				echo "}" >> $EmbedMAS_TMP/json.out
+			fi
+			i=$((i+1))  
+		done
+	echo "}" >> $EmbedMAS_TMP/json.out
+	cat $EmbedMAS_TMP/json.out
 fi
 
 ######################## Mode Operation #####################################
@@ -56,7 +76,7 @@ elif [ "$modeOperation" = "client" ]; then
 	echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 	wpa_passphrase $name $key > $EmbedMAS_HOME/conf/WLANs/lan_$name.conf
 	echo "Agendando WLAN Reconfigure ..."
-	$EmbedMAS_HOME/bin/task/taskNew.sh "/usr/bin/chonosWifiConf -f default"
+	$EmbedMAS_HOME/bin/task/taskNew.sh "/usr/bin/chonosWifiConf -m default"
 	exit 0
 fi
 

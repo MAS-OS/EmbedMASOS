@@ -56,24 +56,27 @@ public class Wifi extends HttpServlet {
 		Connection conn = new Connection(userSession.getUsername(),userSession.getPassword(),
 				serverSession.getHostname(),serverSession.getPort());
 		
-		ShellCommands cmd = new ShellCommands();
+//		ShellCommands cmd = new ShellCommands();
 		
 		if(action!=null) {
 			if(action.equals("scan")){	
-				conn.scanWLAN();
-				request.setAttribute("resposta",conn.listWLANs());
+				serverSession.connect(userSession.getUsername(), userSession.getPassword());
+				request.setAttribute("resposta",serverSession.exec(conn.getWifiScanListCMD()));
+				serverSession.disconnect();
 			}
 			else if(action.equals("status")){
-				conn.refreshWLAN();
-				request.setAttribute("resposta",conn.statusWLAN());
+				serverSession.connect(userSession.getUsername(), userSession.getPassword());
+				request.setAttribute("resposta",serverSession.exec(conn.getWifiStatusCMD()));
+				serverSession.disconnect();
 			}
 			else if(action.equals("apmode")){
-				
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-	/*			serverSession.exec(cmd.createTask());
-				serverSession.exec(cmd.addTask(cmd.getAPModeWLAN()));
-				serverSession.exec(cmd.addTask(cmd.getRestartWLAN()));
-				serverSession.exec(cmd.playTask());*/
+				request.setAttribute("resposta",serverSession.exec(
+						conn.getWifiAPMode(
+								request.getParameter("apESSID"), 
+								request.getParameter("apKEY")
+								)
+						));
 				serverSession.disconnect();
 				
 				userSession.logout();
@@ -81,44 +84,34 @@ public class Wifi extends HttpServlet {
 				request.setAttribute("resposta","Configuração em Andamento. Aguarde!");
 				dispatcher = request.getRequestDispatcher("home.jsp");
 
-			}else if(action.equals("delconf")) {
+			}else if(action.equals("forget")) {
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-	/*			serverSession.exec(cmd.createTask());
-				serverSession.exec(cmd.addTask(cmd.getDelWLANsConf()));
-				serverSession.exec(cmd.playTask());*/
+				request.setAttribute("resposta",serverSession.exec(conn.getWifiForgetCMD()));
 				serverSession.disconnect();
 				
 				request.setAttribute("resposta","Configurações de WLAN apagadas!");
 				dispatcher = request.getRequestDispatcher("wifi.jsp");
+			}else if(action.equals("tryreconnect")) {
+				
+				serverSession.connect(userSession.getUsername(), userSession.getPassword());
+				request.setAttribute("resposta",serverSession.exec(conn.getWifiTryReconnectCMD()));
+				serverSession.disconnect();
 			}else if(action.equals("listconf")) {
 				
-				String list = "<hr>Redes cadastradas<br>";
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-				list = list + serverSession.exec("sudo cat "+cmd.getJavinoPath()+"WLANs/lan_*.conf | grep ssid");
+				request.setAttribute("resposta",serverSession.exec(conn.getWifiWellKnownListCMD()));
 				serverSession.disconnect();
-				list = list+"<hr>";
-				
-				request.setAttribute("resposta",list.replaceAll("\t", "<br>"));
-				dispatcher = request.getRequestDispatcher("wifi.jsp");
 			}
-			else if(action.equals("saveconf")) {
+			else if(action.equals("clientmode")) {
 				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-		/*		serverSession.exec(cmd.createTask());
-				serverSession.exec(cmd.addTask(cmd.getNewWLANConf(request.getParameter("connectESSID"), request.getParameter("connectKEY"))));
-				serverSession.exec(cmd.playTask());*/
+				request.setAttribute("resposta",serverSession.exec(
+						conn.getWifiClientMode(
+								request.getParameter("connectESSID"), 
+								request.getParameter("connectKEY")
+								)
+						));
 				serverSession.disconnect();
 
-				request.setAttribute("resposta","Configuração de WLAN adicionada com sucesso!");
-				dispatcher = request.getRequestDispatcher("wifi.jsp");
-			}else if(action.equals("restartwlan")) {
-				serverSession.connect(userSession.getUsername(), userSession.getPassword());
-			/*	serverSession.exec(cmd.createTask());
-				serverSession.exec(cmd.addTask(cmd.getCreateWPAfile()));
-				serverSession.exec(cmd.addTask(cmd.getRestartWLAN()));
-				serverSession.exec(cmd.addTask("rm -rf /tmp/javinoAPMode"));
-				serverSession.exec(cmd.playTask());*/
-				serverSession.disconnect();
-				
 				userSession.logout();
 
 				request.setAttribute("resposta","Configuração em Andamento. Aguarde!");

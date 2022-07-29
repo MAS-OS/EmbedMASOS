@@ -65,21 +65,21 @@ public class HomePage extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("commander.jsp");
 		}
 		else if(action.equals("wifi")) {
-			Connection conn = new Connection(userSession.getUsername(), userSession.getPassword(),
-					serverSession.getHostname(), serverSession.getPort());									/*Classe responsável por gerenciar a conexão*/
-			conn.refreshWLAN();																				/*Atualizando infomações sobre a conexão sem fio*/
+	//		Connection conn = new Connection(userSession.getUsername(), userSession.getPassword(),
+	//				serverSession.getHostname(), serverSession.getPort());									/*Classe responsável por gerenciar a conexão*/
+	//		conn.refreshWLAN();																				/*Atualizando infomações sobre a conexão sem fio*/
 
-			request.setAttribute("resposta", conn.statusWLAN());
+	//		request.setAttribute("resposta", conn.statusWLAN());
 			dispatcher = request.getRequestDispatcher("wifi.jsp");
 		}
 		else if(action.equals("reboot") || (action.equals("poweroff"))) {
 			serverSession.connect(userSession.getUsername(), userSession.getPassword());					/*Conectando via SSH*/
 			
 			if(action.equals("reboot"))
-				serverSession.exec("sudo reboot");															/*Enviando comando para reiniciar*/				
+				serverSession.exec("reboot");															/*Enviando comando para reiniciar*/				
 
 			if(action.equals("poweroff"))
-				serverSession.exec("sudo poweroff");														/*Enviando comando para desligar*/
+				serverSession.exec("poweroff");														/*Enviando comando para desligar*/
 			
 			serverSession.disconnect();																		/*Desconectando*/
 

@@ -1,5 +1,6 @@
 #! /bin/bash
 EmbedMAS_HOME=/opt/EmbedMAS
+EmbedMAS_TMP=/tmp/.embedMAS
 lockfile=/tmp/EmbedMAS-WifiConn.lock
 
 
@@ -18,7 +19,6 @@ fi
 if [ "$opt" = "help" ]; then
 	cat $EmbedMAS_HOME/docs/scripts/chonosWifiConn.txt
 elif [ "$opt" = "list" ]; then
-# source: https://github.com/smega/iwlist-data-processing/blob/master/grep/sc_grep.sh
 	COMMAND=$(iwlist ${wlanInterface} scan | grep -v "IE: Unknown:" | grep -v "Bit Rates" | grep -v "Extra:")
 	IFS=$'\n'
 
@@ -47,6 +47,43 @@ elif [ "$opt" = "list" ]; then
 	done
 
 	echo "$data"
+elif [ "$opt" = "status" ]; then
+	mkdir -p $EmbedMAS_TMP
+	iwconfig $wlanInterface > $EmbedMAS_TMP/status
+
+	mode=`cat $EmbedMAS_TMP/status | grep Mode | xargs | cut -d ":" -f 2 | cut -d " " -f 1`
+
+	if [ "$mode" = "Master" ]; then
+		# Caso Modo AP
+		essid=`cat /etc/wpa_supplicant/wpa_supplicant.conf | grep "ssid=" | xargs | cut -d "=" -f 2`
+		bitRate="unknown"
+		quality="unknown"
+		frequency=`cat /etc/wpa_supplicant/wpa_supplicant.conf | grep "frequency" | xargs | cut -d "=" -f 2`
+		echo "{" > $EmbedMAS_TMP/json.out
+			echo "\"Interface\": \"$wlanInterface\"," >> $EmbedMAS_TMP/json.out
+			echo "\"ESSID\": \"$essid\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Mode\": \"$mode\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Mb/s\": \"$bitRate\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Quality\": \"$quality\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Frequency\": \"$frequency\"" >> $EmbedMAS_TMP/json.out
+		echo "}" >> $EmbedMAS_TMP/json.out
+		cat $EmbedMAS_TMP/json.out
+	elif [ "$mode" = "Managed" ]; then
+		# Caso Modo Cliente
+		essid=`cat $EmbedMAS_TMP/status | grep "ESSID:" | xargs | cut -d ":" -f 2`
+		bitRate=`cat $EmbedMAS_TMP/status  | grep "Bit Rate" | xargs | cut -d "=" -f 2 | cut -d " " -f 1`
+		quality=`cat $EmbedMAS_TMP/status  | grep "Quality" | xargs | cut -d "=" -f 2 | cut -d " " -f 1`
+		frequency=`cat $EmbedMAS_TMP/status | grep Frequency | xargs | cut -d " " -f 2 | cut -d ":" -f 2`
+		echo "{" > $EmbedMAS_TMP/json.out
+			echo "\"Interface\": \"$wlanInterface\"," >> $EmbedMAS_TMP/json.out
+			echo "\"ESSID\": \"$essid\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Mode\": \"$mode\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Mb/s\": \"$bitRate\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Quality\": \"$quality\"," >> $EmbedMAS_TMP/json.out
+			echo "\"Frequency\": \"$frequency\"" >> $EmbedMAS_TMP/json.out
+		echo "}" >> $EmbedMAS_TMP/json.out
+		cat $EmbedMAS_TMP/json.out
+	fi
 elif [ "$opt" = "" ]; then
 	touch $lockfile
 	echo $wlanInterface

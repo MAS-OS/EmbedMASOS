@@ -5,15 +5,16 @@ Nome: Gerenciador de Conexão de Rede sem fio
 Descrição: Utilizado para listar redes sem fio disponíveis.
 
 OPÇÕES:
-	--help - Exibe este tutorial
-	--list - Lista redes sem fio ao alcance 
+	--help   - Exibe este tutorial
+	--list 	 - Lista redes sem fio ao alcance 
+	--status - Exibe a configuração atual da WLAN 
 
 EXEMPLOS:
 	chonosWifiConn
 		Executa Menu de Scan e Conexão em rede sem fio
 	
-	chonosWifiConn --list
-		Lista ESSID de redes ao alcance do dispositivo
+	chonosWifiConn [opção]
+		Executa uma das funções definidas acima
 
 
 ChonOS - http://os.chon.group

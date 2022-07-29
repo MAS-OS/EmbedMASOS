@@ -6,51 +6,54 @@ value(50).
 //!conf.
 /* Plans */
 +!start: abroad(no)[source(agentComm)] <-
-	.print("I am inside - starting my task");
+	.print("agentArgo está na nave - Iniciando controle do hardware");
 	!conf.
 	
 +!start: abroad(yes)[source(agentComm)] <-
-	.print("Waiting for transference");
+	.print("AgentArgo aguardando transporte");
 	.wait(5000);
 	-abroad(yes);
 	.send(agentComm, askOne, abroad(Status), Reply);
-	-+Reply;
+	+Reply;
 	!start.
 
 +!start <-
 	.send(agentComm, askOne, abroad(Status), Reply);
-	-+Reply;
+	+Reply;
 	!start.
 	
 //************************************************************
 +!conf: abroad(no)<-
-	.print("Conecting with resource 01");
+	.print("Iniciando a comunicação com o Arduino");
 	.port(ttyACM0);
 	.percepts(open);
 	!decide.
 	
 +!decide:lightSensor(no) <-
-	.print("No light - waiting");
+	.print("SemLuz-aguardando");
 	!decide.
 	
 +!decide:lightSensor(yes) <-
 	!atua.
 	
 +!decide <-
-	.print("Error!").
+	.print("Erro ao comunicar com o hardware").
 
-///************************************************************//
 
+
+
+	
 +!atua: lightSensor(no)  <-
 	.act(stopRightNow);
-	.print("Stopping light off");
+	.print("Parando a execução - Fim da Luz");
 	!decide.
 
 +!atua: lightSensor(yes) <-
 	//.print("tem luz e está andando");
 	!rota.
 
-
+	
+	
 +!rota: obstFront(X) & value(Y) & obstLeft(L) & X > Y & L<= Y <-
 	.act(turnRight);
 	.print("Frente Livre e Direita Com obstáculo L=",L);

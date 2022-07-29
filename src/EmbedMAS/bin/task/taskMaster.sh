@@ -11,7 +11,7 @@ commands(){
 	fi
 }
 
-echo "Ativando taskMaster"
+echo "[  OK  ] Ativando o taskMaster"
 ls /tmp/taskMaster.alive 2> /dev/null >/dev/null
 [ $? -eq 0 ] && echo "EM-Execucao" && exit 0
 touch /tmp/taskMaster.alive
