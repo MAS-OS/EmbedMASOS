@@ -1,1 +1,0 @@
-/usr/bin/java -Xms256m -jar /opt/EmbedMAS/lib/jason/lib/jason.jar /opt/EmbedMAS/lib/ultron-protocol/inquilinism_receiver/embeddedMAS.mas2j -console

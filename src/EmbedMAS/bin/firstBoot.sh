@@ -51,6 +51,7 @@ ln -s $EmbedMAS_HOME/etc/hosts /etc/hosts
 ln -s $EmbedMAS_HOME/bin/chonosWifiConn.sh /usr/bin/chonosWifiConn
 ln -s $EmbedMAS_HOME/bin/chonosWifiConf.sh /usr/bin/chonosWifiConf
 ln -s $EmbedMAS_HOME/bin/chonosFirmwareManager.sh /usr/bin/chonosFirmwareManager
+ln -s $EmbedMAS_HOME/bin/chonosEmbeddedMAS.sh /usr/bin/chonosEmbeddedMAS
 ln -s $EmbedMAS_HOME/bin/task/taskNew.sh /usr/bin/EmbedMAS-NewTask
 
 
@@ -80,6 +81,7 @@ ln -s $EmbedMAS_HOME/root/.java /root/.java
 ln -s $EmbedMAS_HOME/root/.jason /root/.jason
 ln -s $EmbedMAS_HOME/root/.arduino15 /root/.arduino15
 ln -s $EmbedMAS_HOME/root/Arduino /root/Arduino
+ln -s $EmbedMAS_HOME/root/EmbeddedMAS /root/EmbeddedMAS
 
 /usr/bin/chonosWifiConf -m ap
 
