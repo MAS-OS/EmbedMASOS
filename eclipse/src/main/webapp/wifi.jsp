@@ -72,8 +72,10 @@ userSession = (User) request.getSession().getAttribute("userSession");
 	 <br>
 	 <form action="Wifi" method="post">
 	  <input type="hidden" id="action" name="action" value="apmode">
-	  ESSID:	<input type="text" 		id="connectESSID" 	name="apESSID"	size="15">
-	  KEY (8 caracteres obrigatório):		<input type="password"	id="connectKEY" 	name="apKEY"	size="15">
+	  ESSID:	
+	  <input type="text" 		id="apESSID" 	name="apESSID"	size="15">
+	  KEY (8 caracteres obrigatório):		
+	  <input type="password"	id="apKEY" 	name="apKEY"	size="15">
 	  <input type="submit" value="APMode">
 	  </form>
 	  

@@ -45,6 +45,11 @@
 		</form>
 		
 		<form action="HomePage" method="post">
+			<input type="hidden" id="action" name="action" value="arduino">
+			<input type="submit" value="Firmware">
+		</form>
+		
+		<form action="HomePage" method="post">
 			<input type="hidden" id="action" name="action" value="logout">
 			<input type="submit" value="SAIR">
 		</form>

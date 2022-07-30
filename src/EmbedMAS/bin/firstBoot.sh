@@ -50,6 +50,7 @@ ln -s $EmbedMAS_HOME/etc/hosts /etc/hosts
 # Scripts
 ln -s $EmbedMAS_HOME/bin/chonosWifiConn.sh /usr/bin/chonosWifiConn
 ln -s $EmbedMAS_HOME/bin/chonosWifiConf.sh /usr/bin/chonosWifiConf
+ln -s $EmbedMAS_HOME/bin/chonosFirmwareManager.sh /usr/bin/chonosFirmwareManager
 ln -s $EmbedMAS_HOME/bin/task/taskNew.sh /usr/bin/EmbedMAS-NewTask
 
 
