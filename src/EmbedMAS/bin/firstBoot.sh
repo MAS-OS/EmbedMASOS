@@ -64,7 +64,8 @@ apt install $EmbedMAS_HOME/var/cache/apt/archives/openjdk-8-jre_8u312-b07-1+rpi1
 apt install $EmbedMAS_HOME/var/cache/apt/archives/libexpat1_2.2.10-2+deb11u3_armhf.deb -y
 apt install $EmbedMAS_HOME/var/cache/apt/archives/libexpat1-dev_2.2.10-2+deb11u3_armhf.deb -y
 apt install $EmbedMAS_HOME/var/cache/apt/archives/python3-pip_20.3.4-4+rpt1_all.deb -y
-pip install --no-index --find-links /opt/EmbedMAS/var/cache/pip/ pyserial
+pip install --no-index --find-links $EmbedMAS_HOME/var/cache/pip/ pyserial
+pip install --no-index --find-links $EmbedMAS_HOME/var/cache/pip/ wtee
 
 # Instalando DNSUtils
 apt install $EmbedMAS_HOME/var/cache/apt/archives/bind9-libs_1%3a9.16.27-1~deb11u1_armhf.deb -y

@@ -1,7 +1,7 @@
 #! /bin/sh
 EmbedMAS_HOME=/opt/EmbedMAS
 EmbedMAS_TMP=/tmp/.embedMAS
-mkdir -p $EmbedMAS_TMP
+EmbedMAS_LOGFILE=$EmbedMAS_TMP/embeddedMAS.log
 
 while getopts h:f:m:c:e:k:-: flag
 do
@@ -62,20 +62,20 @@ if [ "$modeOperation" = "ap" ]; then
 	echo 1 > $EmbedMAS_HOME/conf/apMode.conf
 	$EmbedMAS_HOME/bin/lan/wpa_file_generator.sh $op1 $op2 $op3
 
-	echo "Agendando AP WLAN Reconfigure ..."
+	echo "Agendando AP WLAN Reconfigure ..." > $EmbedMAS_LOGFILE
 	$EmbedMAS_HOME/bin/task/taskNew.sh "/usr/bin/chonosWifiConf -f apmode"
 	exit 0
 elif [ "$modeOperation" = "default" ]; then
 	echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 	$EmbedMAS_HOME/bin/lan/wpa_file_generator.sh
 
-	echo "Agendando Default WLAN Reconfigure ..."
+	echo "Agendando Default WLAN Reconfigure ..." > $EmbedMAS_LOGFILE
 	$EmbedMAS_HOME/bin/task/taskNew.sh "/usr/bin/chonosWifiConf -f default"
 	exit 0
 elif [ "$modeOperation" = "client" ]; then
 	echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 	wpa_passphrase $name $key > $EmbedMAS_HOME/conf/WLANs/lan_$name.conf
-	echo "Agendando WLAN Reconfigure ..."
+	echo "Agendando WLAN Reconfigure ..." > $EmbedMAS_LOGFILE
 	$EmbedMAS_HOME/bin/task/taskNew.sh "/usr/bin/chonosWifiConf -m default"
 	exit 0
 fi

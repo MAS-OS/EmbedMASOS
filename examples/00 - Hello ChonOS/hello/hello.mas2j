@@ -1,0 +1,11 @@
+/* Jason Project */
+
+MAS hello {
+
+    infrastructure: Centralised
+
+    agents:
+        agent01;
+
+}
+

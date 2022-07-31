@@ -1,7 +1,9 @@
 #! /bin/sh
 EmbedMAS_HOME=/opt/EmbedMAS
+EmbedMAS_TMP=/tmp/.embedMAS
+EmbedMAS_LOGFILE=$EmbedMAS_TMP/embeddedMAS.log
 
-echo "[  OK  ] Ativando o teste de Conexão"
+echo "[  OK  ] Ativando o teste de Conexão" > $EmbedMAS_LOGFILE
 echo 0 > $EmbedMAS_HOME/conf/apMode.conf
 
 apMode(){
@@ -42,7 +44,7 @@ commands(){
 				if lanComm; then
 					return 0
 				else
-					echo "LAN não conectada - ativando modo AP"
+					echo "LAN não conectada - ativando modo AP" > $EmbedMAS_LOGFILE
 					/usr/bin/chonosWifiConf -m ap
 				fi
 			fi

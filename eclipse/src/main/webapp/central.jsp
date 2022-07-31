@@ -50,6 +50,11 @@
 		</form>
 		
 		<form action="HomePage" method="post">
+			<input type="hidden" id="action" name="action" value="embeddedmas">
+			<input type="submit" value="Reasoning">
+		</form>
+		
+		<form action="HomePage" method="post">
 			<input type="hidden" id="action" name="action" value="logout">
 			<input type="submit" value="SAIR">
 		</form>

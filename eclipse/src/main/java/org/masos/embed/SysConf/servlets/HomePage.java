@@ -69,6 +69,8 @@ public class HomePage extends HttpServlet {
 		}
 		else if(action.equals("arduino")) {
 			dispatcher = request.getRequestDispatcher("arduino.jsp");
+		}else if(action.equals("embeddedmas")) {
+			dispatcher = request.getRequestDispatcher("embeddedmas.jsp");
 		}
 		else if(action.equals("reboot") || (action.equals("poweroff"))) {
 			serverSession.connect(userSession.getUsername(), userSession.getPassword());					/*Conectando via SSH*/

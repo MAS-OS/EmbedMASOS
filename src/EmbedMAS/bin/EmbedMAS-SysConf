@@ -2,11 +2,12 @@
 arg1=$1
 
 if [ "$arg1" = "start" ]; then
+	rm -rf /opt/EmbedMAS/lib/tomcat/conf/certs/*
 	tar -zxvf /opt/EmbedMAS/lib/tomcat/conf/certs.tar.gz --directory /opt/EmbedMAS/lib/tomcat/conf/
 	/opt/EmbedMAS/lib/tomcat/bin/catalina.sh start
 elif [ "$arg1" = "stop" ]; then
 	/opt/EmbedMAS/lib/tomcat/bin/catalina.sh stop
-	rm /opt/EmbedMAS/lib/tomcat/conf/certs/*
+	rm -rf /opt/EmbedMAS/lib/tomcat/conf/certs/*
 else
   echo "try again"
 fi
