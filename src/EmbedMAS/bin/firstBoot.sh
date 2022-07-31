@@ -84,7 +84,4 @@ ln -s $EmbedMAS_HOME/root/.arduino15 /root/.arduino15
 ln -s $EmbedMAS_HOME/root/Arduino /root/Arduino
 ln -s $EmbedMAS_HOME/root/EmbeddedMAS /root/EmbeddedMAS
 
-/usr/bin/chonosWifiConf -m ap
-
 echo 0 > $EmbedMAS_HOME/conf/firstBoot.conf
-reboot
